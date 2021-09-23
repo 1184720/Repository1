@@ -1,0 +1,40 @@
+
+echo "Welke webserver wil je installeren (kies uit: apache, nginx, lighttpd)"
+read webserver
+
+if [ $webserver -- "apache" ]
+	then
+	apt install apache2
+
+echo "Apache word geinstalleerd"
+
+elif [ $webserver -- "nginx" ]
+	then 
+	apt install nginx
+
+echo "Nginx word geinstalleerd"
+
+elif [ $webserver -- "lighttpd" ]
+	then
+	apt install lighttpd
+
+echo "Lighttpd word geinstalleerd"
+
+fi
+
+echo "PHP en MySQL worden nu geinstalleerd"
+
+apt install php7
+apt install mysql
+
+echo "Wat is jouw domeinnaam: "
+read domeinnaam
+
+wget -o Nextcloud.zip https://download.nextcloud.com/server/releases/nextcloud-21.0.2.zip
+
+unzip nextcloud.zip /$domeinnaam
+
+Echo "De configuratie gaat nu beginnen"
+
+sudo -u www-data php occ config:system:set logtimezone
+--value="Europe/Amsterdam"
